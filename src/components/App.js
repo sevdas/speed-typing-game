@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export default function App() {
   const STARTING_TIME = 2;
@@ -8,6 +8,7 @@ export default function App() {
   const [timeRemaining, setTimeRemaining] = useState(STARTING_TIME);
   const [isTimeRunning, setIsTimeRunning] = useState(false);
   const [wordCount, setWordCount] = useState(0);
+  const textBoxRef = useRef(null);
 
   const handleChange = (event) => {
     const { value } = event.target;
@@ -21,10 +22,13 @@ export default function App() {
   };
 
   //After the game ends, make it so the user can click the start button again to display a second time.
+  //Make the input box focus immediately when the game starts
   const startGame = () => {
     setIsTimeRunning(true);
     setTimeRemaining(STARTING_TIME);
     setText("");
+    textBoxRef.current.disabled = false;
+    textBoxRef.current.focus();
   };
 
   const endGame = () => {
@@ -50,6 +54,7 @@ export default function App() {
     <div>
       <h1>How fast do you type?</h1>
       <textarea
+        ref={textBoxRef}
         type="text"
         value={text}
         onChange={handleChange}
