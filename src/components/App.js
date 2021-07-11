@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import useWordGame from "../hooks/useWordGame";
 
 export default function App() {
