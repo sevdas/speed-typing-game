@@ -1,4 +1,4 @@
-# Speed Up 🖋:
+# [Speed Up](https://sevdas.github.io/speed-typing-game/) 🖋:
 
 ## Project Overview
 
@@ -6,7 +6,6 @@ Speed typing game that when started automatically receives focus and lets the us
 
 This is a client side project using React useState, useEffect, useRef, and custom hook created.
 
-[Visit:] (https://sevdas.github.io/speed-typing-game/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
