@@ -5,34 +5,40 @@ export default function App() {
   //Hold current value of the count down timer and display
   const [text, setText] = useState("");
   const [timeRemaining, setTimeRemaining] = useState(15);
+  const [isTimeRunning, setIsTimeRunning] = useState(false);
 
   const handleChange = (event) => {
     const { value } = event.target;
     setText(value);
-    console.log(value);
   };
 
   //Calculate the number of words in the textarea field
-  const calculateWords = (countText) => {
+  const calculateWordCount = (countText) => {
     const countTextArr = text.trim().split(" ");
     return countTextArr.filter((word) => word !== "").length;
   };
 
-  // Update timer every time timeRemaining changes.
+  const handleClick = () => {
+    setIsTimeRunning(true);
+  };
+
+  // Update timer every time timeRemaining value changes.
   useEffect(() => {
-    timeRemaining > 0 &&
-      setTimeout(() => setTimeRemaining((prevTime) => prevTime - 1), 1000);
-  }, [timeRemaining])
+    if (isTimeRunning && timeRemaining > 0) {
+      setTimeout(() => {
+        setTimeRemaining((time) => time - 1);
+      }, 1000);
+    } else if (timeRemaining === 0) {
+      setIsTimeRunning(false);
+    }
+  }, [timeRemaining, isTimeRunning]);
 
   return (
     <div>
       <h1>How fast do you type?</h1>
       <textarea type="text" value={text} onChange={handleChange} />
       <h4>Remaining Time:{timeRemaining}</h4>
-      <button
-        onClick={() => console.log(calculateWords(text))}
-        className="button"
-      >
+      <button onClick={handleClick} className="button">
         Start
       </button>
       <h1>Word Count:</h1>
